@@ -336,17 +336,7 @@ async function switchView(name) {
   } catch (error) { showGlobalError(error); }
 }
 
-function applyRole() {
-  state.permissions = state.user.permissions || [];
-  const isAdmin = state.user.role === 'admin';
-  const canWrite = hasPermission('document.create') || hasPermission('customer.create') || hasPermission('product.create');
-  $$('.admin-only').forEach((el) => el.classList.toggle('hidden', !isAdmin));
-  $$('.writer-only').forEach((el) => el.classList.toggle('hidden', !canWrite));
-  setElementPermissionState();
-  $('#current-user-name').textContent = state.user.name;
-  $('#current-user-role').textContent = ROLE_LABELS[state.user.role];
-  $('#user-avatar').textContent = initials(state.user.name);
-}
+
 
 async function loadInitialData() {
   const [me, settings, customers, products] = await Promise.all([
